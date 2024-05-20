@@ -33,7 +33,7 @@ class Bot:
 
     def download_user_photo(self, msg):
         """
-        Downloads the photos that sent to the Bot to `photos` directory (should be existed)
+        Downloads  the photos that sent to the Bot to `photos` directory (should be existed)
         :return:
         """
         if not self.is_current_msg_photo(msg):

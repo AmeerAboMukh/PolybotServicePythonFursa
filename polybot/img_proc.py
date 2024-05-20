@@ -95,7 +95,7 @@ class Img:
             if height_of_first_image != height_of_second_image:
                 raise RuntimeError("Images do not have the same height and cannot be concatenated horizontally!!")
 
-            # Create a new list to hold the concatenated image data
+            # Create a new list to hold the concatenated image data.
             concatenated_data = []
             for row_in_first_image, row_in_second_image in zip(self.data, other_img.data):
                 concatenated_data.append(row_in_first_image + row_in_second_image)  # Concatenate each row horizontally
