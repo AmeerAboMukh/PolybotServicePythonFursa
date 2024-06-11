@@ -1,0 +1,37 @@
+name: Prod Polybot Service Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_PROD_TOKEN }}
+  TELEGRAM_APP_URL: 'https://prodbot.ameerabomukh.click:8443'
+  EC2_HOST: prod-bot.ameerabomukh.click
+  EC2_USER: ubuntu
+
+jobs:
+  Deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the app code
+        uses: actions/checkout@v2
+
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.PROD_EC2_SSH_KEY }}
+
+      - name: SSH to EC2 and deploy
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ env.EC2_USER }}@${{ env.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/PolybotServicePythonFursa/polybot
+            git fetch origin main
+            git merge origin/main || { echo "Merge conflict detected. Please resolve the conflicts and try again."; exit 1; }
+            source venv/bin/activate
+            pip install -r requirements.txt
+            sudo systemctl restart prod-bot.service
+          EOF
