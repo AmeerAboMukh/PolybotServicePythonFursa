@@ -8,7 +8,7 @@ on:
 env:
   TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_DEV_TOKEN }}
   TELEGRAM_APP_URL: 'https://devbot.ameerabomukh.click:8443'
-  EC2_HOST: dev-bot.ameerabomukh.click
+  EC2_HOST: devbot.ameerabomukh.click
   EC2_USER: ubuntu
 
 jobs:
