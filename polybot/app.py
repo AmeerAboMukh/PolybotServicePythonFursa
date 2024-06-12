@@ -11,14 +11,14 @@ TELEGRAM_APP_URL = os.environ['TELEGRAM_APP_URL']
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'Ok'
+    return 'OkOk'
 
 
 @app.route(f'/{TELEGRAM_TOKEN}/', methods=['POST'])
 def webhook():
     req = request.get_json()
     bot.handle_message(req['message'])
-    return 'OkOK'
+    return 'Ok'
 
 
 if __name__ == "__main__":
