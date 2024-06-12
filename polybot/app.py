@@ -18,7 +18,7 @@ def index():
 def webhook():
     req = request.get_json()
     bot.handle_message(req['message'])
-    return 'Ok'
+    return 'OkOKOKOK'
 
 
 if __name__ == "__main__":
